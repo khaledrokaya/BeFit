@@ -3,7 +3,7 @@ const About = () => {
     <section className="about" id="about">
       <div className="row">
         <div className="image">
-          <img src="./src/images/about.jpg" alt="" />
+          <img src="./images/about.jpg" alt="" />
         </div>
         <div className="content">
           <h3>a word about us</h3>
