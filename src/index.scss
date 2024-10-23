@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
+
+// Variables
+$orange: #ff9f1a;
+$black: #000;
+$white: #fff;
+$dark-gray: #222;
+$gray: #666;
+$red: #ff0000;
+$font-family: 'Open Sans', sans-serif;
+
+// Mixins
+@mixin transition($duration: 0.3s, $timing: linear) {
+  transition: all $duration $timing;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin box-shadow($color: $black, $blur: 0.3rem, $spread: 0.5rem) {
+  box-shadow: 0 $blur $spread $color;
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-transform: capitalize;
+  outline: none;
+  text-decoration: none;
+}
+
+*::selection {
+  background: $orange;
+  color: $white;
+}
+
+#root {
+  min-width: 25rem;
+}
+
+html {
+  font-size: 10px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+.error {
+  color: $red;
+  font-size: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.btn {
+  cursor: pointer;
+  border: .2rem solid $orange;
+  color: $orange;
+  background: none;
+  padding: .5rem 3rem;
+  margin-top: 1rem;
+  position: relative;
+  z-index: 0;
+  font-size: 2rem;
+  @include transition(0.1s, linear);
+
+  &:hover {
+    color: $white;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: $orange;
+    z-index: -1;
+    @include transition(0.1s, linear);
+  }
+
+  &:hover::before {
+    width: 100%;
+  }
+}
+
+.heading {
+  display: inline-block;
+  color: $gray;
+  margin: 2rem 0;
+  padding: 1rem 0;
+  padding-top: 8rem;
+  font-size: 3rem;
+  border-bottom: .2rem solid $orange;
+}
+
+header {
+  width: 100%;
+  @include flex-center();
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 2rem 3rem;
+
+  .logo {
+    font-size: 3rem;
+    color: $white;
+    text-shadow: 2px 2px 5px $black;
+
+    span {
+      color: $orange;
+    }
+  }
+
+  .navbar ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    li {
+      margin: 0 1rem;
+    }
+
+    a {
+      color: $white;
+      font-size: 2rem;
+      text-shadow: 0px 0px 7px $black;
+      @include transition(0.1s, linear);
+
+      &:hover {
+        color: $orange;
+        text-shadow: none;
+      }
+    }
+  }
+}
+
+
+.home {
+  min-height: 100vh;
+  background: url(./images/home.jpg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  @include flex-center();
+  flex-direction: column;
+
+  h1 {
+    font-size: 6rem;
+    color: $white;
+    text-align: center;
+    text-shadow: 0 .3rem .5rem $black;
+    padding: 0 1rem;
+    text-transform: uppercase;
+  }
+
+  .btn {
+    @include box-shadow($black, .3rem, .5rem);
+    color: $white;
+  }
+}
+
+
+.about .row {
+  min-height: 100vh;
+  @include flex-center();
+  flex-wrap: wrap;
+  padding-top: 8rem;
+
+  .image {
+    flex: 1 1 40rem;
+    padding: 2rem;
+  }
+
+  .image img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .content {
+    flex: 1 1 40rem;
+    padding: 2rem;
+  }
+
+  .content h3 {
+    color: $gray;
+    font-size: 4rem;
+  }
+
+  .content p {
+    color: $gray;
+    font-size: 1.7rem;
+    padding: 1rem 0;
+  }
+}
+
+.service {
+  min-height: 100vh;
+  text-align: center;
+
+  .box-container {
+    @include flex-center();
+    flex-wrap: wrap;
+
+    .box {
+      height: 23rem;
+      width: 35rem;
+      margin: 1rem;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+
+      .info {
+        height: 90%;
+        width: 90%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        background: $white;
+        flex-flow: column;
+        @include flex-center();
+        @include transition(0.1s, linear);
+
+        h3 {
+          font-size: 2.5rem;
+          color: $gray;
+        }
+
+        p {
+          font-size: 1.2rem;
+          color: $gray;
+          padding: 1rem 2rem;
+        }
+      }
+
+      &:hover .info {
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+  }
+}
+
+.trainer {
+  min-height: 100vh;
+  text-align: center;
+  background: $gray;
+
+  .heading {
+    color: $white;
+  }
+
+  .box-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .box {
+      height: 40rem;
+      margin: 1.5rem 1rem;
+      width: 27rem;
+      border: .5rem solid $orange;
+      overflow: hidden;
+      position: relative;
+      @include box-shadow($black, .3rem, .5rem);
+
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+        @include transition(0.1s, linear);
+      }
+
+      .info {
+        color: $gray;
+        background: $white;
+        border-top: .5rem solid $orange;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        font-size: 2rem;
+        width: 100%;
+        padding: 1rem 0;
+      }
+
+      &:hover img {
+        transform: scale(1.2);
+      }
+
+    }
+  }
+
+}
+
+.plan {
+  min-height: 100vh;
+  text-align: center;
+  background: $white;
+
+  .box-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .box {
+      background: $white;
+      margin: 2rem;
+      width: 30rem;
+      @include box-shadow(rgba(0, 0, 0, .3), .3rem, .5rem);
+      @include transition(0.1s, linear);
+
+      .title {
+        font-size: 2.5rem;
+        background: $orange;
+        color: $white;
+        padding: 1rem 0;
+      }
+
+      .price {
+        font-size: 4rem;
+        color: $gray;
+        padding-top: 1rem;
+
+        span {
+          font-size: 2rem;
+        }
+
+      }
+
+      .month {
+        font-size: 2rem;
+        color: $gray;
+      }
+
+      ul {
+        margin: 2rem 8rem;
+        list-style: none;
+
+        li {
+          text-align: left;
+          padding: .5rem 0;
+          font-size: 1.5rem;
+          color: $gray;
+
+          i {
+            color: $orange;
+            padding: 0 .5rem;
+          }
+        }
+      }
+
+      .btn {
+        margin-bottom: 3rem;
+      }
+
+      &:hover {
+        transform: scale(1.04);
+      }
+    }
+  }
+}
+
+.register {
+  min-height: 90vh;
+  text-align: center;
+  background: $black;
+  padding-bottom: 3rem;
+
+  .heading {
+    color: $white;
+  }
+
+  form {
+    width: 75%;
+    margin: 0 auto;
+
+    .inputBox {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .inputBox input,
+    textarea {
+      height: 4rem;
+      width: 49%;
+      background: $dark-gray;
+      color: $white;
+      padding: 0 1rem;
+      margin: 1rem 0;
+      font-size: 2rem;
+      border: none;
+
+      &::placeholder {
+        color: $white;
+      }
+    }
+
+    textarea {
+      height: 20rem;
+      resize: none;
+      padding: 1rem;
+      width: 100%;
+    }
+  }
+}
+
+/* media queries  */
+@media (max-width:768px) {
+  html {
+    font-size: 55%;
+  }
+
+  .register form {
+    width: 90%;
+  }
+}
+
+
+@media (max-width:500px) {
+  html {
+    font-size: 50%;
+  }
+
+  .home h1 {
+    font-size: 2.5rem;
+  }
+
+  header {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  .register form .inputBox input {
+    width: 100%;
+  }
+}
